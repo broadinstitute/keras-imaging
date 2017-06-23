@@ -6,6 +6,7 @@ class ImageGenerator(object):
         self,
         directory,
         batch_size=32,
+        sampling_method=None,
         seed=None,
         shape=(224, 224, 3),
         shuffle=True
@@ -14,6 +15,7 @@ class ImageGenerator(object):
             batch_size=batch_size,
             directory=directory,
             generator=self,
+            sampling_method=sampling_method,
             seed=seed,
             shape=shape,
             shuffle=shuffle

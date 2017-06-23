@@ -4,6 +4,8 @@ import os
 import threading
 
 import keras.backend
+import imblearn.over_sampling
+import imblearn.under_sampling
 import numpy
 import six.moves
 import skimage.io
@@ -128,6 +130,7 @@ class DirectoryIterator(Iterator):
             directory,
             generator,
             batch_size=32,
+            sampling_method=None,
             seed=None,
             shape=(224, 224, 3),
             shuffle=True,
@@ -135,6 +138,8 @@ class DirectoryIterator(Iterator):
         self.directory = directory
 
         self.generator = generator
+
+        self.sampling_method = sampling_method
 
         self.shape = shape
 
@@ -182,6 +187,17 @@ class DirectoryIterator(Iterator):
                 self.filenames += filenames
 
                 i += len(classes)
+
+        if self.sampling_method:
+            x = numpy.arange(self.samples).reshape((-1, 1))
+
+            y = self.classes
+
+            indices, self.classes = self.sampling_method.fit_sample(x, y)
+
+            indices = indices.reshape(-1)
+
+            self.filenames = [self.filenames[index] for index in indices]
 
         super(DirectoryIterator, self).__init__(
             self.samples,
