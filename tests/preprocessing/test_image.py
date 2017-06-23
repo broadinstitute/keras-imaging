@@ -80,6 +80,10 @@ class TestImageGenerator:
 
         assert a == b == c
 
+        assert generator.n == generator.classes.shape[0]
+
+        assert generator.samples == generator.classes.shape[0]
+
         generator = keras_microscopy.preprocessing.image.ImageGenerator()
 
         sampling_method = imblearn.under_sampling.RandomUnderSampler()
@@ -95,3 +99,7 @@ class TestImageGenerator:
         c = generator.classes[generator.classes == 2].shape
 
         assert a == b == c
+
+        assert generator.n == generator.classes.shape[0]
+
+        assert generator.samples == generator.classes.shape[0]

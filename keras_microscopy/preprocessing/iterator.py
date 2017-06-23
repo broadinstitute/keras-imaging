@@ -4,8 +4,6 @@ import os
 import threading
 
 import keras.backend
-import imblearn.over_sampling
-import imblearn.under_sampling
 import numpy
 import six.moves
 import skimage.io
@@ -189,15 +187,7 @@ class DirectoryIterator(Iterator):
                 i += len(classes)
 
         if self.sampling_method:
-            x = numpy.arange(self.samples).reshape((-1, 1))
-
-            y = self.classes
-
-            indices, self.classes = self.sampling_method.fit_sample(x, y)
-
-            indices = indices.reshape(-1)
-
-            self.filenames = [self.filenames[index] for index in indices]
+            self.balance()
 
         super(DirectoryIterator, self).__init__(
             self.samples,
@@ -205,6 +195,19 @@ class DirectoryIterator(Iterator):
             shuffle,
             seed
         )
+
+    def balance(self):
+        x = numpy.arange(self.samples).reshape((-1, 1))
+
+        y = self.classes
+
+        indices, self.classes = self.sampling_method.fit_sample(x, y)
+
+        indices = indices.reshape(-1)
+
+        self.filenames = [self.filenames[index] for index in indices]
+
+        self.samples = self.classes.shape[0]
 
     def next(self):
         with self.lock:
