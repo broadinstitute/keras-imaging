@@ -72,8 +72,6 @@ class Iterator(object):
 
         self.batch_size = batch_size
 
-        self.generator = self.sample(n, batch_size, shuffle, seed)
-
         self.lock = threading.Lock()
 
         self.n = n
@@ -81,6 +79,8 @@ class Iterator(object):
         self.shuffle = shuffle
 
         self.total_batches_seen = 0
+
+        self.generator = self.sample(n, batch_size, shuffle, seed)
 
     def reset(self):
         self.batch_index = 0
@@ -113,7 +113,7 @@ class Iterator(object):
 
             indices = index_array[index: index + current_batch_size]
 
-            yield indices, index, current_batch_size
+            yield (indices, index, current_batch_size)
 
     def __iter__(self):
         return self
@@ -135,7 +135,7 @@ class DirectoryIterator(Iterator):
     ):
         self.directory = directory
 
-        self.generator = generator
+        self.image_data_generator = generator
 
         self.sampling_method = sampling_method
 
@@ -213,16 +213,18 @@ class DirectoryIterator(Iterator):
         with self.lock:
             indicies, index, batch_size = next(self.generator)
 
-        shape = (batch_size,) + self.shape
+        shape = (batch_size, *self.shape)
 
         batch_x = numpy.zeros(shape, dtype=keras.backend.floatx())
 
         for batch_index, index in enumerate(indicies):
-            filename = self.filenames[index]
-
-            filename = os.path.join(self.directory, filename)
+            filename = os.path.join(self.directory, self.filenames[index])
 
             x = skimage.io.imread(filename)
+
+            x = self.image_data_generator.standardize(x)
+
+            x = self.image_data_generator.transform(x)
 
             batch_x[batch_index] = x
 

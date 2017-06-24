@@ -20,3 +20,11 @@ class ImageGenerator(object):
             shape=shape,
             shuffle=shuffle
         )
+
+    @staticmethod
+    def standardize(x):
+        return x
+
+    @staticmethod
+    def transform(x):
+        return x
