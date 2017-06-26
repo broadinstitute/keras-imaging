@@ -213,7 +213,7 @@ class DirectoryIterator(Iterator):
         with self.lock:
             indicies, index, batch_size = next(self.generator)
 
-        shape = (batch_size, *self.shape)
+        shape = (batch_size,) + self.shape
 
         batch_x = numpy.zeros(shape, dtype=keras.backend.floatx())
 
