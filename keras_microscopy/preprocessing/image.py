@@ -22,6 +22,31 @@ class ImageGenerator(object):
         rotate=False,
         smooth=False
     ):
+        """
+        :param correct_distortion:
+
+        :param correct_uneven_illumination:
+
+        :param correct_vignetting:
+
+        :param desaturate:
+
+        :param equalize:
+
+        :param flip_horizontally:
+
+        :param flip_vertically:
+
+        :param reduce_noise:
+
+        :param remove_chromatic_aberration:
+
+        :param rescale_intensity:
+
+        :param rotate:
+
+        :param smooth:
+        """
         self.correct_distortion = correct_distortion
 
         self.correct_uneven_illumination = correct_uneven_illumination
@@ -46,6 +71,32 @@ class ImageGenerator(object):
 
         self.smooth = smooth
 
+    def flow_from_dictionary(
+        self,
+        batch_size=32,
+        mode=None,
+        sampling_method=None,
+        seed=None,
+        shape=(224, 224, 3),
+        shuffle=True
+    ):
+        """
+        :param batch_size: int
+
+        :param mode: {‘image_classification’, ‘image_processing’ ‘image_segmentation’, ‘object_detection’} or None; optional
+
+        :param sampling_method:
+
+        :param seed: int or None; optional
+
+        :param shape: tuple of ints
+
+        :param shuffle: boolean; optional
+
+        :return:
+        """
+        return self
+
     def flow_from_directory(
         self,
         directory,
@@ -55,6 +106,23 @@ class ImageGenerator(object):
         shape=(224, 224, 3),
         shuffle=True
     ):
+        """
+        :param directory:
+
+        :param batch_size: int
+
+        :param sampling_method:
+
+        :param seed: int or None; optional
+
+        :param shape: tuple of ints
+
+        :param shuffle: boolean; optional
+
+        :return:
+
+        :rtype: keras_microscopy.preprocessing.DirectoryIterator
+        """
         return keras_microscopy.preprocessing.DirectoryIterator(
             batch_size=batch_size,
             directory=directory,
@@ -66,6 +134,11 @@ class ImageGenerator(object):
         )
 
     def standardize(self, x):
+        """
+        :param x:
+
+        :return:
+        """
         if self.desaturate:
             x = self.desaturate(x)
 
@@ -81,6 +154,11 @@ class ImageGenerator(object):
         return x
 
     def transform(self, x):
+        """
+        :param x:
+
+        :return:
+        """
         if self.flip_horizontally:
             if numpy.random.random() < 0.5:
                 x = numpy.fliplr(x)
