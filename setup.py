@@ -6,6 +6,7 @@ setuptools.setup(
     classifiers=[
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: BSD License",
+        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.5",
         "Topic :: Scientific/Engineering"
     ],
@@ -20,9 +21,13 @@ setuptools.setup(
         ],
     },
     install_requires=[
+        "futures",
         "imblearn",
         "keras",
-        "keras-resnet"
+        "keras-resnet",
+        "numpy",
+        "scikit-image",
+        "six"
     ],
     license="BSD",
     name="keras-microscopy",
