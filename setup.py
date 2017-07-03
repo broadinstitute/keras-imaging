@@ -14,6 +14,7 @@ setuptools.setup(
         ],
     },
     install_requires=[
+        "imblearn",
         "keras",
         "keras-resnet"
     ],
