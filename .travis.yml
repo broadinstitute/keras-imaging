@@ -18,4 +18,4 @@ dist: trusty
 install: pip install --editable .[test]
 language: python
 script:
-  - pytest tests/ --cov keras_rcnn/
+  - pytest tests/ --cov keras_microscopy/
