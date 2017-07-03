@@ -1,8 +1,6 @@
 import itertools
 import os.path
 
-import imblearn.over_sampling
-import imblearn.under_sampling
 import numpy
 import numpy.testing
 import skimage.io
