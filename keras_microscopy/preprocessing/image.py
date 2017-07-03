@@ -71,32 +71,6 @@ class ImageGenerator(object):
 
         self.smooth = smooth
 
-    def flow_from_dictionary(
-        self,
-        batch_size=32,
-        mode=None,
-        sampling_method=None,
-        seed=None,
-        shape=(224, 224, 3),
-        shuffle=True
-    ):
-        """
-        :param batch_size: int
-
-        :param mode: {‘image_classification’, ‘image_processing’ ‘image_segmentation’, ‘object_detection’} or None; optional
-
-        :param sampling_method:
-
-        :param seed: int or None; optional
-
-        :param shape: tuple of ints
-
-        :param shuffle: boolean; optional
-
-        :return:
-        """
-        return self
-
     def flow_from_directory(
         self,
         directory,
