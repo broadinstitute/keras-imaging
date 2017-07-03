@@ -31,7 +31,7 @@ class TestImageGenerator:
 
             directory = numpy.random.choice(["a", "b", "c"])
 
-            pathname = os.path.join(tmpdir, directory, filename)
+            pathname = os.path.join(str(tmpdir), directory, filename)
 
             skimage.io.imsave(pathname, image)
 
@@ -58,7 +58,7 @@ class TestImageGenerator:
 
             directory = numpy.random.choice(["a", "b", "c"])
 
-            pathname = os.path.join(tmpdir, directory, filename)
+            pathname = os.path.join(str(tmpdir), directory, filename)
 
             skimage.io.imsave(pathname, image)
 
