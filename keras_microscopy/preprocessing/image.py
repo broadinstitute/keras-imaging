@@ -1,3 +1,5 @@
+import imblearn.over_sampling
+import imblearn.under_sampling
 import numpy
 import skimage.filters
 import skimage.transform
@@ -97,6 +99,11 @@ class ImageGenerator(object):
 
         :rtype: keras_microscopy.preprocessing.DirectoryIterator
         """
+        if sampling_method == "oversample":
+            sampling_method = imblearn.over_sampling.RandomOverSampler(random_state=seed)
+        elif sampling_method == "undersample":
+            sampling_method = imblearn.under_sampling.RandomUnderSampler(random_state=seed)
+
         return keras_microscopy.preprocessing.DirectoryIterator(
             batch_size=batch_size,
             directory=directory,

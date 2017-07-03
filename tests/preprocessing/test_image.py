@@ -66,7 +66,7 @@ class TestImageGenerator:
 
         generator = keras_microscopy.preprocessing.image.ImageGenerator()
 
-        sampling_method = imblearn.over_sampling.RandomOverSampler()
+        sampling_method = "oversample"
 
         generator = generator.flow_from_directory(
             directory=str(tmpdir),
@@ -86,7 +86,7 @@ class TestImageGenerator:
 
         generator = keras_microscopy.preprocessing.image.ImageGenerator()
 
-        sampling_method = imblearn.under_sampling.RandomUnderSampler()
+        sampling_method = "undersample"
 
         generator = generator.flow_from_directory(
             directory=str(tmpdir),
