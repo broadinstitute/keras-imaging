@@ -1,3 +1,5 @@
+import imblearn.over_sampling
+import imblearn.under_sampling
 import numpy
 import skimage.filters
 import skimage.transform
@@ -71,32 +73,6 @@ class ImageGenerator(object):
 
         self.smooth = smooth
 
-    def flow_from_dictionary(
-        self,
-        batch_size=32,
-        mode=None,
-        sampling_method=None,
-        seed=None,
-        shape=(224, 224, 3),
-        shuffle=True
-    ):
-        """
-        :param batch_size: int
-
-        :param mode: {‘image_classification’, ‘image_processing’ ‘image_segmentation’, ‘object_detection’} or None; optional
-
-        :param sampling_method:
-
-        :param seed: int or None; optional
-
-        :param shape: tuple of ints
-
-        :param shuffle: boolean; optional
-
-        :return:
-        """
-        return self
-
     def flow_from_directory(
         self,
         directory,
@@ -123,6 +99,11 @@ class ImageGenerator(object):
 
         :rtype: keras_microscopy.preprocessing.DirectoryIterator
         """
+        if sampling_method == "oversample":
+            sampling_method = imblearn.over_sampling.RandomOverSampler(random_state=seed)
+        elif sampling_method == "undersample":
+            sampling_method = imblearn.under_sampling.RandomUnderSampler(random_state=seed)
+
         return keras_microscopy.preprocessing.DirectoryIterator(
             batch_size=batch_size,
             directory=directory,
