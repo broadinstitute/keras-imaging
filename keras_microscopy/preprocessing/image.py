@@ -20,6 +20,7 @@ class ImageGenerator(object):
         equalize=None,
         flip_horizontally=False,
         flip_vertically=False,
+        preprocessing_function=None,
         reduce_noise=None,
         remove_chromatic_aberration=False,
         rescale_intensity=None,
@@ -70,6 +71,8 @@ class ImageGenerator(object):
         self.flip_horizontally = flip_horizontally
 
         self.flip_vertically = flip_vertically
+
+        self.preprocessing_function = preprocessing_function
 
         self.reduce_noise = reduce_noise
 
@@ -132,6 +135,9 @@ class ImageGenerator(object):
 
         :return:
         """
+        if self.preprocessing_function:
+            x = self.preprocessing_function(x)
+
         if self.desaturate:
             x = self.desaturate(x)
 
