@@ -58,17 +58,18 @@ def reduce_noise(**kwargs):
     :param kwargs: Additional arguments for skimage.restoration.denoise_bilateral.
     :return: The reduce_noise function.
     """
-    if keras.backend.image_data_format() == 'channels_first':
-        def f(x):
-            y = numpy.empty_like(x, dtype=numpy.float64)
-            for i in range(len(x[:, 0, 0])):
-                y[i, :, :] = skimage.restoration.denoise_bilateral(x[i, :, :], **kwargs)
-            return y
-        return f
-    else:
-        def f(x):
-            y = numpy.empty_like(x, dtype=numpy.float64)
-            for i in range(len(x[0, 0, :])):
-                y[:, :, i] = skimage.restoration.denoise_bilateral(x[:, :, i], **kwargs)
-            return y
-        return f
+    def f(x):
+        if keras.backend.image_data_format() == 'channels_last':
+            x = numpy.moveaxis(x, -1, 0)
+
+        y = numpy.empty_like(x, dtype=numpy.float64)
+
+        for index, img in enumerate(x):
+            y[index] = skimage.restoration.denoise_bilateral(img, **kwargs)
+
+        if keras.backend.image_data_format() == 'channels_last':
+            y = numpy.moveaxis(y, 0, -1)
+
+        return y
+
+    return f
