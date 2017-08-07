@@ -22,9 +22,11 @@ def rescale(scale, **kwargs):
     :return: The rescale function.
     """
     if keras.backend.image_data_format() == 'channels_first':
-        return lambda x: skimage.transform.resize(x, (len(x[:, 0, 0]), len(x[0, :, 0]) * scale, len(x[0, 0, :]) * scale), **kwargs)
+        axes_scale = (1.0, scale, scale)
     else:
-        return lambda x: skimage.transform.resize(x, (len(x[:, 0, 0]) * scale, len(x[0, :, 0]) * scale, len(x[0, 0, :])), **kwargs)
+        axes_scale = (scale, scale, 1.0)
+
+    return lambda x: skimage.transform.resize(x, numpy.multiply(x.shape, axes_scale), **kwargs)
 
 
 def equalize(**kwargs):
@@ -33,20 +35,21 @@ def equalize(**kwargs):
     :param kwargs: Additional arguments for skimage.exposure.equalize_hist.
     :return: The equalize function.
     """
-    if keras.backend.image_data_format() == 'channels_first':
-        def f(x):
-            y = numpy.empty_like(x, dtype=numpy.float64)
-            for i in range(len(x[:, 0, 0])):
-                y[i, :, :] = skimage.exposure.equalize_hist(x[i, :, :], **kwargs)
-            return y
-        return f
-    else:
-        def f(x):
-            y = numpy.empty_like(x, dtype=numpy.float64)
-            for i in range(len(x[0, 0, :])):
-                y[:, :, i] = skimage.exposure.equalize_hist(x[:, :, i], **kwargs)
-            return y
-        return f
+    def f(x):
+        if keras.backend.image_data_format() == 'channels_last':
+            x = numpy.moveaxis(x, -1, 0)
+
+        y = numpy.empty_like(x, dtype=numpy.float64)
+
+        for index, img in enumerate(x):
+            y[index] = skimage.exposure.equalize_hist(img, **kwargs)
+
+        if keras.backend.image_data_format() == 'channels_last':
+            y = numpy.moveaxis(y, 0, -1)
+
+        return y
+
+    return f
 
 
 def reduce_noise(**kwargs):
