@@ -30,12 +30,12 @@ setuptools.setup(
         "six"
     ],
     license="BSD",
-    name="keras-microscopy",
+    name="keras-imaging",
     packages=setuptools.find_packages(
         exclude=[
             "tests"
         ]
     ),
-    url="https://github.com/broadinstitute/keras-microscopy",
+    url="https://github.com/broadinstitute/keras-imaging",
     version="0.0.1"
 )
