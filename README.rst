@@ -1,5 +1,5 @@
-keras-microscopy
-================
+keras-imaging
+=============
 
 .. image:: https://travis-ci.org/broadinstitute/keras-microscopy.svg?branch=master
     :target: https://travis-ci.org/broadinstitute/keras-microscopy
