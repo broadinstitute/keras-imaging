@@ -5,7 +5,7 @@ import numpy
 import numpy.testing
 import skimage.io
 
-import keras_microscopy.preprocessing.image
+import keras_imaging.preprocessing.image
 
 
 class TestImageGenerator:
@@ -35,7 +35,7 @@ class TestImageGenerator:
 
             count += 1
 
-        generator = keras_microscopy.preprocessing.image.ImageGenerator()
+        generator = keras_imaging.preprocessing.image.ImageGenerator()
 
         generator = generator.flow_from_directory(str(tmpdir), shape=(64, 64, 5))
 
@@ -62,7 +62,7 @@ class TestImageGenerator:
 
             count += 1
 
-        generator = keras_microscopy.preprocessing.image.ImageGenerator()
+        generator = keras_imaging.preprocessing.image.ImageGenerator()
 
         sampling_method = "oversample"
 
@@ -82,7 +82,7 @@ class TestImageGenerator:
 
         assert generator.samples == generator.classes.shape[0]
 
-        generator = keras_microscopy.preprocessing.image.ImageGenerator()
+        generator = keras_imaging.preprocessing.image.ImageGenerator()
 
         sampling_method = "undersample"
 
