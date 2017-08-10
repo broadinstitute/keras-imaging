@@ -19,6 +19,6 @@ def load_data(name):
 
     filename = os.path.join(pathname, basename)
 
-    images, compounds, doses = numpy.load(filename)
+    data = numpy.load(filename)
 
-    return images, (compounds, doses)
+    return data["images"], (data["compounds"], data["doses"])
