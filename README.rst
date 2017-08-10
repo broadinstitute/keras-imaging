@@ -1,11 +1,11 @@
 keras-imaging
 =============
 
-.. image:: https://travis-ci.org/broadinstitute/keras-microscopy.svg?branch=master
-    :target: https://travis-ci.org/broadinstitute/keras-microscopy
+.. image:: https://travis-ci.org/broadinstitute/keras-imaging.svg?branch=master
+    :target: https://travis-ci.org/broadinstitute/keras-imaging
 
-.. image::https://codecov.io/gh/broadinstitute/keras-microscopy/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/broadinstitute/keras-microscopy
+.. image::https://codecov.io/gh/broadinstitute/keras-imaging/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/broadinstitute/keras-imaging
 
 Contributing
 ============
@@ -28,9 +28,9 @@ Upcoming work is managed using GitHub issues. Labels are applied to each issue f
 | `Needs verification`_ | Reported abnormal behavior which should be verified as a bug. |
 +-----------------------+---------------------------------------------------------------+
 
-.. _Bug: https://github.com/broadinstitute/keras-microscopy/issues?q=is%3Aopen+is%3Aissue+label%3ABug
-.. _Documentation: https://github.com/broadinstitute/keras-microscopy/issues?q=is%3Aopen+is%3Aissue+label%3ADocumentation
-.. _Easy: https://github.com/broadinstitute/keras-microscopy/issues?q=is%3Aopen+is%3Aissue+label%3AEasy
-.. _Enhancement: https://github.com/broadinstitute/keras-microscopy/issues?q=is%3Aopen+is%3Aissue+label%3AEnhancement
-.. _Feature: https://github.com/broadinstitute/keras-microscopy/issues?q=is%3Aopen+is%3Aissue+label%3AFeature
-.. _`Needs verification`: https://github.com/broadinstitute/keras-microscopy/issues?q=is%3Aopen+is%3Aissue+label%3A%22Needs+verification%22
+.. _Bug: https://github.com/broadinstitute/keras-imaging/issues?q=is%3Aopen+is%3Aissue+label%3ABug
+.. _Documentation: https://github.com/broadinstitute/keras-imaging/issues?q=is%3Aopen+is%3Aissue+label%3ADocumentation
+.. _Easy: https://github.com/broadinstitute/keras-imaging/issues?q=is%3Aopen+is%3Aissue+label%3AEasy
+.. _Enhancement: https://github.com/broadinstitute/keras-imaging/issues?q=is%3Aopen+is%3Aissue+label%3AEnhancement
+.. _Feature: https://github.com/broadinstitute/keras-imaging/issues?q=is%3Aopen+is%3Aissue+label%3AFeature
+.. _`Needs verification`: https://github.com/broadinstitute/keras-imaging/issues?q=is%3Aopen+is%3Aissue+label%3A%22Needs+verification%22
